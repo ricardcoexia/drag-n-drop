@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title></title>
+	<style>
+		html{
+			font-size:10px;
+		}
+		body{
+			font-size:2rem;
+		}
+		#drop{
+			width: 200px;
+			height: 200px;
+			background: red;
+		}
+	</style>
+</head>
+<body>
+
+<div id="drop"></div>
+
+<div style="text-align: right;">
+	<img id="cat-1" class="dragable-cat" src="http://placekitten.com/200/200/" data-title="Special Cat 1" data-price="200" alt="" />
+	<img class="dragable-cat" src="http://placekitten.com/200/210" data-title="Special Cat 2" data-price="250" alt="" />
+	<img class="dragable-cat" src="http://placekitten.com/200/220" data-title="Special Cat 3" data-price="260" alt="" />
+	<img class="dragable-cat" src="http://placekitten.com/200/250" data-title="Special Cat 4" data-price="270" alt="" />
+</div>
+
+<div id="output">
+	
+</div>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script>
+
+	function cancel(e) {
+		  if (e.preventDefault) {
+		    e.preventDefault();
+		    
+		
+		  }
+		  return false;
+		}
+		
+		var drop = document.getElementById('drop');
+		var draggedItem = null;
+		
+		$('.dragable-cat').each(function(index){
+			$(this)[0].addEventListener('dragstart',function(e){
+				
+				draggedItem = jQuery(this);
+				
+			},false);
+		});
+	
+		drop.addEventListener('dragover', cancel);
+		drop.addEventListener('dragenter', cancel);
+		
+		drop.addEventListener('drop', function (e) {
+		  
+		   e.preventDefault();	
+		  
+		   $('#output').append( $(draggedItem).data('title') + " costs " +  $(draggedItem).data('price') + "<br />");
+		   
+		  return false;
+		});
+			
+</script>
+</body>
+</html>
